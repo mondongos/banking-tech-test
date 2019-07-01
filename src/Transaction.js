@@ -1,17 +1,19 @@
 function Transaction() {
   this._balance = 0
-  this._transactions = {}
+  this._allTransactions = []
+  this._currentTransaction = {}
 };
 
 // Object.keys(account._transactions)[0]
 
-Transaction.prototype.deposit = function(date, depositAmount) {
-  this._transactions[date] = depositAmount;
-  this._balance+=depositAmount;
+Transaction.prototype.deposit = function(tranDate, depositAmount) {
+  this._currentTransaction = {date: tranDate, amount: depositAmount, type: "credit"};
 };
 
-Transaction.prototype.withdraw = function(date, withdrawAmount) {
-  if(this._balance - withdrawAmount < 0) {throw new Error("Insufficent Funds")}
-  this._transactions[date] = withdrawAmount * -1;
-  this._balance-=withdrawAmount
+Transaction.prototype.withdraw = function(tranDate, withdrawAmount) {
+  this._currentTransaction = {date: tranDate, amount: withdrawAmount, type: "debit"};
+};
+
+Transaction.prototype.save = function() {
+  this._allTransactions.push(this._currentTransaction)
 };

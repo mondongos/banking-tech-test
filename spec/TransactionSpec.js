@@ -8,27 +8,21 @@ describe("Transactions", function() {
     date2 = "07-09-20"
   });
 
-  it("should be able to make a deposit", function() {
+  it("deposit should be stored in currentTransaction", function() {
     transaction.deposit(date1, 1000);
-    expect(transaction._balance).toEqual(1000);
+    expect(transaction._currentTransaction).toEqual({date: date1, amount: 1000, type: "credit"});
   });
 
-  it("should be able to make a withdrawal", function() {
+  it("withdrawal should be stored in currentTransaction", function() {
+    transaction.withdraw(date1, 500);
+    expect(transaction._currentTransaction).toEqual({date: date1, amount: 500, type: "debit"});
+    });
+
+  it("transactions can be saved to allTransactions", function() {
     transaction.deposit(date1, 1000);
+    transaction.save();
     transaction.withdraw(date2, 500);
-    expect(transaction._balance).toEqual(500);
+    transaction.save();
+    expect(transaction._allTransactions).toEqual([{date: date1, amount: 1000, type: "credit"}, {date: date2, amount: 500, type: "debit"}]);
+    });
   });
-
-  it("should not allow withdrawals if account has insufficient funds", function() {
-    transaction.deposit(date1, 1000);
-    expect(function() {
-      transaction.withdraw(date2, 2000)
-    }).toThrowError("Insufficent Funds");
-  });
-
-  // it("should store the amount of each transaction", function() {
-  //   transaction.deposit(1000);
-  //   transaction.withdraw(500);
-  //   expect()
-  // });
-});
