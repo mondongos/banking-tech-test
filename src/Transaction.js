@@ -4,8 +4,6 @@ function Transaction() {
   this._currentTransaction = {}
 };
 
-// Object.keys(account._transactions)[0]
-
 Transaction.prototype.deposit = function(tranDate, depositAmount) {
   this._currentTransaction = {date: tranDate, amount: depositAmount, type: "credit"};
 };

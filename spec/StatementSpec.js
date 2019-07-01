@@ -8,8 +8,8 @@ describe("Statement", function(){
   });
 
   it("should display the statement", function(){
-    transaction.deposit("10/01/2012", 1000)
-    transaction.save()
-    expect(statement.viewStatement(transaction._transactions)).toEqual("date || credit || debit || balance \n 10/01/2012 || 1000 ||  || 1000")
+    transaction.deposit("10/01/2012", 1000);
+    transaction.save();
+    expect(statement.viewStatement(transaction._allTransactions)).toEqual("date || credit || debit || balance \n 10/01/2012 || 1000 ||  || 1000");
   });
 });
