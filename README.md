@@ -43,3 +43,7 @@ As a user,
 So that I can view my balance and transactions,
 I'd like to be able to see my bank statements by day.
 ```
+
+### Things to add
+* Controller to bring app together
+* Interface so user can interact with app more easily
