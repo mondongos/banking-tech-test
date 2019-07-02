@@ -1,15 +1,17 @@
 describe("Statement", function(){
-  var statement
   var transaction
 
   beforeEach(function() {
-    statement = new Statement();
     transaction = new Transaction();
   });
 
   it("should display the statement", function(){
     transaction.deposit("10/01/2012", 1000);
     transaction.save();
-    expect(statement.viewStatement(transaction._allTransactions)).toEqual("date || credit || debit || balance \n 10/01/2012 || 1000 ||  || 1000");
+    transaction.deposit("11/01/2012", 2000);
+    transaction.save();
+    var statement = new Statement(transaction._allTransactions)
+    console.log(statement.dataPrint())
+    expect(statement.dataPrint()).toEqual("date || credit || debit || balance\n10/01/2012 || 1000 ||  || 1000\n11/01/2012 || 2000 ||  || 3000\n");
   });
 });

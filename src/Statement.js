@@ -4,13 +4,19 @@ function Statement(transactionHistory) {
 };
 
 Statement.prototype.viewStatement = function() {
-  // for(let i = 0; i < this._transactionHistory.length; i++) {
-  //
-  //   Object.values(this._transactionHistory[i])[0]
-  // }
+  return this.dataPrint()
 };
 
 Statement.prototype.headerPrint = function() {
-  
+  return this._heading
+};
 
-}
+Statement.prototype.dataPrint = function() {
+  // for (let i = 0; i < this._transactionHistory.length; i++) {
+  //   Object.values(this._transactionHistory[i])[0]
+  var result = "date || credit || debit || balance\n"
+  for (var i = 0; i < this._transactionHistory.length; i++) {
+    result += Object.values(this._transactionHistory[i]) + "\n"
+  }
+  return result.replace(/,/g, " || ");
+  };
